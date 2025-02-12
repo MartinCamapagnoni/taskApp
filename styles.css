@@ -1,0 +1,73 @@
+#header  {
+    text-align: center;
+}
+
+.task-container {
+    display: flex;
+    gap: 22px;
+    justify-content: space-between;
+    border: 2px solid white;
+    padding: 2rem;
+    background-color: blue; 
+    border: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    gap: 1;
+    width: 20rem;
+}
+
+.taskBottom {
+    align-self: flex-end;
+}
+
+.task-name {
+    margin-left: 2em;
+}
+
+#time{
+    font-weight: 500;
+}
+
+#tasksContainer{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.taskTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+body {
+    background-color: blueviolet;
+    color: white;
+}
+
+.addTask {
+    background-color: black;
+    color: white;
+    font-weight: 500;
+    border: 1px solid black;
+}
+
+.addTask:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid white;
+}
