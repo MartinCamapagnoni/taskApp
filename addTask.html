@@ -11,9 +11,10 @@
 </head>
 
 <body class="d-flex justify-content-center align-items-center">
-    <form>
+    <form onsubmit="saveTask(event)">
+        <label class="label" for="taskName">Task name</label>
         <input id="taskName" type="text" placeholder="Insert task name" />
-        <button onclick="saveTask(event)">Add task</button>
+        <button type="submit">Add task</button>
     </form>
 
     <script src="addTask.js"></script>

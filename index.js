@@ -37,7 +37,10 @@ window.onload = () => {
             pageContainer.innerHTML = pageContainer.innerHTML + ` 
             <div class="task-container" style="margin-bottom: 1rem;">
                 <div class="taskTop">
-                    <h3 class="task-name"> ${tasks[i]}</h3>
+                    <div>
+                        <h3 class="task-name"> ${tasks[i]}</h3>
+                        <h6class="task-status">Completed</h6>
+                    </div>
                     <div>
                         <svg data-bs-toggle="modal" data-bs-target="#editModal" style="cursor: pointer;"
                             onclick="editTask('${tasks[i]}', ${i})" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
@@ -77,9 +80,6 @@ function editTask(taskName, taskIndex) {
     document.getElementById("editTaskInput").value = taskName
     localStorage.setItem("editTask", taskIndex)
 }
-
-
-
 
 function deleteItem(id) {
     const tasks = JSON.parse(localStorage.getItem("tasks"))
