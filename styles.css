@@ -1,4 +1,4 @@
-#header  {
+#header {
     text-align: center;
 }
 
@@ -7,8 +7,8 @@
     gap: 22px;
     justify-content: space-between;
     border: 2px solid white;
-    padding: 2rem;
-    background-color: blue; 
+    padding: 1rem;
+    background-color: blue;
     border: 2px solid white;
     display: flex;
     flex-direction: column;
@@ -20,15 +20,11 @@
     align-self: flex-end;
 }
 
-.task-name {
-    margin-left: 2em;
-}
-
-#time{
+#time {
     font-weight: 500;
 }
 
-#tasksContainer{
+#tasksContainer {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -70,4 +66,49 @@ body {
     background-color: white;
     color: black;
     border: 1px solid white;
+}
+
+.modal-header {
+    background-color: orange;
+    color: white;
+}
+
+#editTaskInput {
+    border-radius: 12px;
+    border: 1px solid orange;
+    padding: 0.2rem;
+    padding-left: 0.5rem;
+}
+
+.modal-body,
+.modal-footer {
+    background-color: yellow;
+    color: black;
+    border: 0;
+}
+
+#saveBtn {
+    background-color: green;
+    color: white;
+    border: 1px solid green;
+}
+
+#closeBtn {
+    background-color: orange;
+    color: white;
+    border: 1px solid orange;
+}
+
+.btn-close {
+    background-color: red;
+}
+
+.noTasksContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    font-weight: 600;
+    font-size: 18px;
 }

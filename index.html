@@ -26,7 +26,6 @@
         </div>
     </div>
     <div id="tasksContainer">
-        
     </div>
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -35,14 +34,17 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Change task name</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <input id="editTaskInput" placeholder="Insert task name" value="" />
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button onclick="editTaskModal()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Save
-                        changes</button>
-                </div>
+                <form onsubmit="editTaskModal()">
+                    <div class="modal-body">
+                        <input id="editTaskInput" placeholder="Insert task name" value="" />
+                    </div>
+                    <div class="modal-footer">
+                        <button id="closeBtn" type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Close</button>
+                        <button id="saveBtn" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save
+                            changes</button>
+                    </div>
+                </form>
             </div>
         </div>
 
