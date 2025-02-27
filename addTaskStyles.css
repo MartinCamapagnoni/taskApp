@@ -32,3 +32,9 @@ button {
     border-radius: 6px;
     border: 1px solid green;
 }
+
+#backBtn {
+    background-color: red;
+    color: white;
+}
+
