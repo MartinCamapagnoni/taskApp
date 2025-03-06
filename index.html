@@ -37,6 +37,11 @@
                 <form onsubmit="editTaskModal()">
                     <div class="modal-body">
                         <input id="editTaskInput" placeholder="Insert task name" value="" />
+                        <select name="editTaskStatus" id="editTaskStatus">
+                            <option value="queued">Queued</option>
+                            <option value="doing">Doing</option>
+                            <option value="completed">Completed</option>
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button id="closeBtn" type="button" class="btn btn-secondary"

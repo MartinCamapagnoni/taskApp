@@ -1,14 +1,23 @@
+const formatDate = (date) => {
+    const day = String(date.getDate()).padStart(2, "0")
+    const month = String(date.getMonth() + 1).padStart(2, "0")
+    const year = date.getFullYear()
+    return `${day}/${month}/${year}`
+}
+
 const addTask = () => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
-    const task = urlParams.get("task")
-    if (task) {
+    const taskName = urlParams.get("taskName")
+    const taskStatus = urlParams.get("taskStatus")
+
+    if (taskName && taskStatus) {
         if (localStorage.getItem("tasks")) {
             const tasks = JSON.parse(localStorage.getItem("tasks"))
-            localStorage.setItem("tasks", JSON.stringify([...tasks, task]))
+            localStorage.setItem("tasks", JSON.stringify([...tasks, { name: taskName, status: taskStatus, created: formatDate(new Date()) }]))
         }
         else {
-            localStorage.setItem("tasks", JSON.stringify(([task])))
+            localStorage.setItem("tasks", JSON.stringify(({ name: taskName, status: taskStatus, created: formatDate(new Date()) })))
         }
         window.location = "index.html"
     }
@@ -38,12 +47,12 @@ window.onload = () => {
             <div class="task-container" style="margin-bottom: 1rem;">
                 <div class="taskTop">
                     <div>
-                        <h3 class="task-name"> ${tasks[i]}</h3>
-                        <h6class="task-status">Completed</h6>
+                        <h3 class="task-name"> ${tasks[i].name}</h3>
+                        <h6class="task-status">${tasks[i].status}</h6>
                     </div>
                     <div>
                         <svg data-bs-toggle="modal" data-bs-target="#editModal" style="cursor: pointer;"
-                            onclick="editTask('${tasks[i]}', ${i})" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                            onclick="editTask('${tasks[i].name}','${tasks[i].status}', ${i})" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                             width="48" height="48" viewBox="0 0 48 48">
                             <path fill="#c94f60"
                                 d="M42.583,9.067l-3.651-3.65c-0.555-0.556-1.459-0.556-2.015,0l-1.718,1.72l5.664,5.664l1.72-1.718	C43.139,10.526,43.139,9.625,42.583,9.067">
@@ -69,6 +78,10 @@ window.onload = () => {
                         </svg>
                     </div>
                 </div>
+                  <div>
+                    <p>Created: ${tasks[i].created}</p>
+                    <p>Deadline: to be added</p>
+                </div>
             </div>
             `
         }
@@ -76,8 +89,11 @@ window.onload = () => {
 
 }
 
-function editTask(taskName, taskIndex) {
+function editTask(taskName, taskStatus, taskIndex) {
+    console.log(taskStatus)
     document.getElementById("editTaskInput").value = taskName
+    document.getElementById("editTaskStatus").value = taskStatus.toLowerCase()
+
     localStorage.setItem("editTask", taskIndex)
 }
 
@@ -97,10 +113,10 @@ function saveTask() {
 }
 
 function editTaskModal() {
-    const newTaskName = document.getElementById("editTaskInput").value
+    const newTask = { name: document.getElementById("editTaskInput").value, status: document.getElementById("editTaskStatus").value }
     const taskId = localStorage.getItem("editTask")
     const tasks = JSON.parse(localStorage.getItem("tasks"))
-    tasks[taskId] = newTaskName
+    tasks[taskId] = newTask
     localStorage.setItem("tasks", JSON.stringify(tasks))
     window.location = "index.html"
 }

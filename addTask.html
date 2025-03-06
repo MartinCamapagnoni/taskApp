@@ -14,6 +14,12 @@
     <form onsubmit="saveTask(event)">
         <label class="label" for="taskName">Task name</label>
         <input id="taskName" type="text" placeholder="Insert task name" />
+        <label class="label" for="taskStatus">Task status</label>
+        <select name="status" id="taskStatus">
+            <option value="queued">Queued</option>
+            <option value="doing">Doing</option>
+            <option value="completed">Completed</option>
+        </select>
         <button type="submit">Add task</button>
         <button id="backBtn" onclick="window.location.back()">Back</button>
     </form>
