@@ -113,9 +113,9 @@ function saveTask() {
 }
 
 function editTaskModal() {
-    const newTask = { name: document.getElementById("editTaskInput").value, status: document.getElementById("editTaskStatus").value }
     const taskId = localStorage.getItem("editTask")
     const tasks = JSON.parse(localStorage.getItem("tasks"))
+    const newTask = { name: document.getElementById("editTaskInput").value, status: document.getElementById("editTaskStatus").value, created: tasks[taskId].created }
     tasks[taskId] = newTask
     localStorage.setItem("tasks", JSON.stringify(tasks))
     window.location = "index.html"
