@@ -20,6 +20,8 @@
             <option value="doing">Doing</option>
             <option value="completed">Completed</option>
         </select>
+        <label class="label" for="taskDeadline">Task deadline</label>
+        <input id="taskDeadline" type="date" placeholder="Choose deadline" />
         <button type="submit">Add task</button>
         <button id="backBtn" onclick="window.location.back()">Back</button>
     </form>
@@ -28,6 +30,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    <script>
+        const today = new Date().toISOString().split("T")[0]
+        document.getElementById("taskDeadline").setAttribute("min", today)
+    </script>
 </body>
 
 </html>

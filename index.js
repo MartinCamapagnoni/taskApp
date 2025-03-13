@@ -10,18 +10,26 @@ const addTask = () => {
     const urlParams = new URLSearchParams(queryString)
     const taskName = urlParams.get("taskName")
     const taskStatus = urlParams.get("taskStatus")
+    const taskDeadline = urlParams.get("taskDeadline")
 
-    if (taskName && taskStatus) {
+    if (taskName && taskStatus && taskDeadline) {
         if (localStorage.getItem("tasks")) {
             const tasks = JSON.parse(localStorage.getItem("tasks"))
-            localStorage.setItem("tasks", JSON.stringify([...tasks, { name: taskName, status: taskStatus, created: formatDate(new Date()) }]))
+            localStorage.setItem("tasks", JSON.stringify([...tasks, { name: taskName, status: taskStatus, created: formatDate(new Date()), deadline: taskDeadline }]))
         }
         else {
-            localStorage.setItem("tasks", JSON.stringify(({ name: taskName, status: taskStatus, created: formatDate(new Date()) })))
+            localStorage.setItem("tasks", JSON.stringify(({ name: taskName, status: taskStatus, created: formatDate(new Date()), deadline: taskDeadline })))
         }
         window.location = "index.html"
     }
 }
+
+const distanceFromDeadline = (date) => {
+    const t = new Date();
+    const inputDate = new Date(date);
+    const diffInDays = (inputDate - t) / (1000 * 60 * 60 * 24);
+    return diffInDays;
+};
 
 window.onload = () => {
     addTask()
@@ -44,7 +52,7 @@ window.onload = () => {
     else {
         for (let i = 0; i < tasks.length; i++) {
             pageContainer.innerHTML = pageContainer.innerHTML + ` 
-            <div class="task-container" style="margin-bottom: 1rem;">
+            <div class="task-container" style="margin-bottom: 1rem; background-color:${distanceFromDeadline(tasks[i].deadline) < 0 ? "orange" : "blue"} ">
                 <div class="taskTop">
                     <div>
                         <h3 class="task-name"> ${tasks[i].name}</h3>
@@ -52,7 +60,7 @@ window.onload = () => {
                     </div>
                     <div>
                         <svg data-bs-toggle="modal" data-bs-target="#editModal" style="cursor: pointer;"
-                            onclick="editTask('${tasks[i].name}','${tasks[i].status}', ${i})" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                            onclick="editTask('${tasks[i].name}','${tasks[i].status}', ${i}, ${tasks[i].deadline})" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                             width="48" height="48" viewBox="0 0 48 48">
                             <path fill="#c94f60"
                                 d="M42.583,9.067l-3.651-3.65c-0.555-0.556-1.459-0.556-2.015,0l-1.718,1.72l5.664,5.664l1.72-1.718	C43.139,10.526,43.139,9.625,42.583,9.067">
@@ -80,7 +88,7 @@ window.onload = () => {
                 </div>
                   <div>
                     <p>Created: ${tasks[i].created}</p>
-                    <p>Deadline: to be added</p>
+                    <p>Deadline: ${tasks[i].deadline}</p>
                 </div>
             </div>
             `
@@ -89,10 +97,11 @@ window.onload = () => {
 
 }
 
-function editTask(taskName, taskStatus, taskIndex) {
-    console.log(taskStatus)
+function editTask(taskName, taskStatus, taskIndex, taskDeadline) {
+    console.log(taskDeadline)
     document.getElementById("editTaskInput").value = taskName
     document.getElementById("editTaskStatus").value = taskStatus.toLowerCase()
+    document.getElementById("editTaskDeadline").value = taskDeadline
 
     localStorage.setItem("editTask", taskIndex)
 }
